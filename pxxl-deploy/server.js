@@ -1,1 +1,41 @@
-Y29uc3QgZnMgPSByZXF1aXJlKCdmcycpOwpjb25zdCBwYXRoID0gcmVxdWlyZSgncGF0aCcpOwpjb25zdCB7IHNwYXduLCBleGVjU3luYyB9ID0gcmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpOwpjb25zdCBjcnlwdG8gPSByZXF1aXJlKCdjcnlwdG8nKTsKY29uc3QgdXVpZCA9IHByb2Nlc3MuZW52LlVVSUQgfHwgcHJvY2Vzcy5lbnYuQVBQX0tFWTsKY29uc3Qgd3NQYXRoID0gcHJvY2Vzcy5lbnYuV1NQQVRIIHx8IHByb2Nlc3MuZW52LkFQSV9ST1VURSB8fCAnL2FwaS92MS9zeW5jJzsKY29uc3QgcG9ydCA9IHBhcnNlSW50KHByb2Nlc3MuZW52LlBPUlQgfHwgJzgwODAnLCAxMCk7CmlmICghdXVpZCkgeyBjb25zb2xlLmVycm9yKCdVVUlEIHJlcXVpcmVkJyk7IHByb2Nlc3MuZXhpdCgxKTsgfQpjb25zdCBiaW4gPSBwYXRoLmpvaW4oX19kaXJuYW1lLCAnd2ViLXdvcmtlcicpOwppZiAoIWZzLmV4aXN0c1N5bmMoYmluKSkgewogIHRyeSB7IGV4ZWNTeW5jKCdub2RlIHNldHVwLmpzJywgeyBzdGRpbzogJ2luaGVyaXQnLCBjd2Q6IF9fZGlybmFtZSB9KTsgfQogIGNhdGNoIChlKSB7IHByb2Nlc3MuZXhpdCgxKTsgfQp9CmNvbnN0IGNmZyA9IHsKICBsb2c6IHsgbG9nbGV2ZWw6ICd3YXJuaW5nJyB9LAogIGluYm91bmRzOiBbewogICAgbGlzdGVuOiAnMC4wLjAuMCcsIHBvcnQsCiAgICBwcm90b2NvbDogJ3ZsZXNzJywKICAgIHNldHRpbmdzOiB7IGNsaWVudHM6IFt7IGlkOiB1dWlkIH1dLCBkZWNyeXB0aW9uOiAnbm9uZScgfSwKICAgIHN0cmVhbVNldHRpbmdzOiB7IG5ldHdvcms6ICd3cycsIHdzU2V0dGluZ3M6IHsgcGF0aDogd3NQYXRoIH0gfSwKICAgIHNuaWZmaW5nOiB7IGVuYWJsZWQ6IHRydWUsIGRlc3RPdmVycmlkZTogWydodHRwJywgJ3RscycsICdxdWljJ10gfQogIH1dLAogIG91dGJvdW5kczogWwogICAgeyBwcm90b2NvbDogJ2ZyZWVkb20nLCB0YWc6ICdkaXJlY3QnLCBzZXR0aW5nczogeyBkb21haW5TdHJhdGVneTogJ1VzZUlQdjQnIH0gfSwKICAgIHsgcHJvdG9jb2w6ICdibGFja2hvbGUnLCB0YWc6ICdibG9jaycgfQogIF0sCiAgcm91dGluZzogewogICAgZG9tYWluU3RyYXRlZ3k6ICdJUElmTm9uTWF0Y2gnLAogICAgcnVsZXM6IFsKICAgICAgeyB0eXBlOiAnZmllbGQnLCBvdXRib3VuZFRhZzogJ2Jsb2NrJywgcHJvdG9jb2w6IFsnYml0dG9ycmVudCddIH0sCiAgICAgIHsgdHlwZTogJ2ZpZWxkJywgb3V0Ym91bmRUYWc6ICdibG9jaycsIGlwOiBbJ2dlb2lwOnByaXZhdGUnXSB9LAogICAgICB7IHR5cGU6ICdmaWVsZCcsIG91dGJvdW5kVGFnOiAnYmxvY2snLCBkb21haW46IFsnZ2Vvc2l0ZTpwcml2YXRlJ10gfQogICAgXQogIH0sCiAgZG5zOiB7IHNlcnZlcnM6IFsnaHR0cHM6Ly8xLjEuMS4xL2Rucy1xdWVyeScsICdodHRwczovLzguOC44LjgvZG5zLXF1ZXJ5J10sIHF1ZXJ5U3RyYXRlZ3k6ICdVc2VJUHY0JyB9Cn07CmNvbnN0IGNmZ1BhdGggPSBwYXRoLmpvaW4oJy90bXAnLCAncnVudGltZS0nICsgY3J5cHRvLnJhbmRvbUJ5dGVzKDQpLnRvU3RyaW5nKCdoZXgnKSArICcuanNvbicpOwpmcy53cml0ZUZpbGVTeW5jKGNmZ1BhdGgsIEpTT04uc3RyaW5naWZ5KGNmZykpOwpjb25zdCBjaGlsZCA9IHNwYXduKGJpbiwgWydydW4nLCAnLWMnLCBjZmdQYXRoXSwgeyBzdGRpbzogJ2luaGVyaXQnLCBjd2Q6IF9fZGlybmFtZSB9KTsKY2hpbGQub24oJ2V4aXQnLCAoYykgPT4gcHJvY2Vzcy5leGl0KGMgfHwgMCkpOwpwcm9jZXNzLm9uKCdTSUdURVJNJywgKCkgPT4gY2hpbGQua2lsbCgnU0lHVEVSTScpKTsK
+const fs = require('fs');
+const path = require('path');
+const { spawn, execSync } = require('child_process');
+const crypto = require('crypto');
+const uuid = process.env.UUID || process.env.APP_KEY;
+const wsPath = process.env.WSPATH || process.env.API_ROUTE || '/api/v1/sync';
+const port = parseInt(process.env.PORT || '8080', 10);
+if (!uuid) { console.error('UUID required'); process.exit(1); }
+const bin = path.join(__dirname, 'web-worker');
+if (!fs.existsSync(bin)) {
+  try { execSync('node setup.js', { stdio: 'inherit', cwd: __dirname }); }
+  catch (e) { process.exit(1); }
+}
+const cfg = {
+  log: { loglevel: 'warning' },
+  inbounds: [{
+    listen: '0.0.0.0', port,
+    protocol: 'vless',
+    settings: { clients: [{ id: uuid }], decryption: 'none' },
+    streamSettings: { network: 'ws', wsSettings: { path: wsPath } },
+    sniffing: { enabled: true, destOverride: ['http', 'tls', 'quic'] }
+  }],
+  outbounds: [
+    { protocol: 'freedom', tag: 'direct', settings: { domainStrategy: 'UseIPv4' } },
+    { protocol: 'blackhole', tag: 'block' }
+  ],
+  routing: {
+    domainStrategy: 'IPIfNonMatch',
+    rules: [
+      { type: 'field', outboundTag: 'block', protocol: ['bittorrent'] },
+      { type: 'field', outboundTag: 'block', ip: ['geoip:private'] },
+      { type: 'field', outboundTag: 'block', domain: ['geosite:private'] }
+    ]
+  },
+  dns: { servers: ['https://1.1.1.1/dns-query', 'https://8.8.8.8/dns-query'], queryStrategy: 'UseIPv4' }
+};
+const cfgPath = path.join('/tmp', 'runtime-' + crypto.randomBytes(4).toString('hex') + '.json');
+fs.writeFileSync(cfgPath, JSON.stringify(cfg));
+const child = spawn(bin, ['run', '-c', cfgPath], { stdio: 'inherit', cwd: __dirname });
+child.on('exit', (c) => process.exit(c || 0));
+process.on('SIGTERM', () => child.kill('SIGTERM'));
