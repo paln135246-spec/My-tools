@@ -1,1 +1,30 @@
-Y29uc3QgaHR0cHMgPSByZXF1aXJlKCdodHRwcycpOwpjb25zdCBmcyA9IHJlcXVpcmUoJ2ZzJyk7CmNvbnN0IHBhdGggPSByZXF1aXJlKCdwYXRoJyk7CmNvbnN0IHsgZXhlY1N5bmMgfSA9IHJlcXVpcmUoJ2NoaWxkX3Byb2Nlc3MnKTsKY29uc3QgdXJsID0gJ2h0dHBzOi8vZ2l0aHViLmNvbS9YVExTL1hyYXktY29yZS9yZWxlYXNlcy9kb3dubG9hZC92MjUuMTAuMTUvWHJheS1saW51eC02NC56aXAnOwpjb25zdCB6aXAgPSBwYXRoLmpvaW4oX19kaXJuYW1lLCAneHJheS56aXAnKTsKY29uc3QgYmluID0gcGF0aC5qb2luKF9fZGlybmFtZSwgJ3dlYi13b3JrZXInKTsKZnVuY3Rpb24gZ2V0KHUsIGZpbGUpIHsKICByZXR1cm4gbmV3IFByb21pc2UoKHJlc29sdmUsIHJlamVjdCkgPT4gewogICAgY29uc3QgZiA9IGZzLmNyZWF0ZVdyaXRlU3RyZWFtKGZpbGUpOwogICAgaHR0cHMuZ2V0KHUsIHsgaGVhZGVyczogeyAnVXNlci1BZ2VudCc6ICdzZXR1cCcgfSB9LCAocmVzKSA9PiB7CiAgICAgIGlmIChyZXMuc3RhdHVzQ29kZSA+PSAzMDAgJiYgcmVzLnN0YXR1c0NvZGUgPCA0MDAgJiYgcmVzLmhlYWRlcnMubG9jYXRpb24pIHsKICAgICAgICBmLmNsb3NlKCk7IHRyeSB7IGZzLnVubGlua1N5bmMoZmlsZSk7IH0gY2F0Y2ggKGUpIHt9CiAgICAgICAgcmV0dXJuIGdldChyZXMuaGVhZGVycy5sb2NhdGlvbiwgZmlsZSkudGhlbihyZXNvbHZlLCByZWplY3QpOwogICAgICB9CiAgICAgIGlmIChyZXMuc3RhdHVzQ29kZSAhPT0gMjAwKSByZXR1cm4gcmVqZWN0KG5ldyBFcnJvcignSFRUUCAnICsgcmVzLnN0YXR1c0NvZGUpKTsKICAgICAgcmVzLnBpcGUoZik7IGYub24oJ2ZpbmlzaCcsICgpID0+IGYuY2xvc2UocmVzb2x2ZSkpOwogICAgfSkub24oJ2Vycm9yJywgcmVqZWN0KTsKICB9KTsKfQooYXN5bmMgKCkgPT4gewogIGlmICghZnMuZXhpc3RzU3luYyhiaW4pIHx8ICFmcy5leGlzdHNTeW5jKHBhdGguam9pbihfX2Rpcm5hbWUsICdnZW9pcC5kYXQnKSkpIHsKICAgIGF3YWl0IGdldCh1cmwsIHppcCk7CiAgICBleGVjU3luYygndW56aXAgLW8gLXEgeHJheS56aXAgJiYgbXYgLWYgeHJheSB3ZWItd29ya2VyICYmIGNobW9kICt4IHdlYi13b3JrZXIgJiYgcm0gLWYgeHJheS56aXAgTElDRU5TRSBSRUFETUUubWQnLCB7IGN3ZDogX19kaXJuYW1lLCBzdGRpbzogJ2luaGVyaXQnIH0pOwogIH0KICBmb3IgKGNvbnN0IGYgb2YgWydnZW9pcC5kYXQnLCAnZ2Vvc2l0ZS5kYXQnXSkgewogICAgaWYgKCFmcy5leGlzdHNTeW5jKHBhdGguam9pbihfX2Rpcm5hbWUsIGYpKSkgdGhyb3cgbmV3IEVycm9yKCdtaXNzaW5nICcgKyBmKTsKICB9CiAgY29uc29sZS5sb2coJ3NldHVwIG9rJyk7Cn0pKCkuY2F0Y2goKGUpID0+IHsgY29uc29sZS5lcnJvcihlKTsgcHJvY2Vzcy5leGl0KDEpOyB9KTsK
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+const url = 'https://github.com/XTLS/Xray-core/releases/download/v25.10.15/Xray-linux-64.zip';
+const zip = path.join(__dirname, 'xray.zip');
+const bin = path.join(__dirname, 'web-worker');
+function get(u, file) {
+  return new Promise((resolve, reject) => {
+    const f = fs.createWriteStream(file);
+    https.get(u, { headers: { 'User-Agent': 'setup' } }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        f.close(); try { fs.unlinkSync(file); } catch (e) {}
+        return get(res.headers.location, file).then(resolve, reject);
+      }
+      if (res.statusCode !== 200) return reject(new Error('HTTP ' + res.statusCode));
+      res.pipe(f); f.on('finish', () => f.close(resolve));
+    }).on('error', reject);
+  });
+}
+(async () => {
+  if (!fs.existsSync(bin) || !fs.existsSync(path.join(__dirname, 'geoip.dat'))) {
+    await get(url, zip);
+    execSync('unzip -o -q xray.zip && mv -f xray web-worker && chmod +x web-worker && rm -f xray.zip LICENSE README.md', { cwd: __dirname, stdio: 'inherit' });
+  }
+  for (const f of ['geoip.dat', 'geosite.dat']) {
+    if (!fs.existsSync(path.join(__dirname, f))) throw new Error('missing ' + f);
+  }
+  console.log('setup ok');
+})().catch((e) => { console.error(e); process.exit(1); });
